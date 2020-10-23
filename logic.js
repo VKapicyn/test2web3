@@ -63,7 +63,7 @@ const _getLPCap = async () => {
     return 2 * (await wethContract.methods.balanceOf(LPTokenAddr).call());
 };
 const _getPairBalance = async () => {
-    let {Kernel, WETH, timestamp } = LPTokenContract.methods.getReserves().call();
+    let {Kernel, WETH, timestamp } = await LPTokenContract.methods.getReserves().call();
     console.log('timestamp', timestamp);
     return { WETH, Kernel };
 };
@@ -73,14 +73,24 @@ const _getLPStatus = async () => {
 const _getLPtimeToEnd = async () => {
     return await kernelContract.methods.getSecondsLeftInLiquidityGenerationEvent().call();
 };
+const _getClaimableLP = async () => {
+    return await kernelContract.methods.canClaimLP(web3.currentProvider.selectedAddress).call();
+}
+
+//sends
 const _callbuyLP = async (amount) => {
     await kernelContract.methods.addLiquidity(true).send({
         from: web3.currentProvider.selectedAddress,
-        value: web3js.utils.toWei(+amount)
+        value: web3js.utils.toWei(amount)
     });
 };
+const _callClaimLP = async () => {
+    await kernelContract.methods.claimLPTokens().send({
+        from: web3.currentProvider.selectedAddress
+    });
+}
 const _callWidhdrawKernel = async (pid, amount) => {
     await kernelContract.methods.withdraw(pid, amount).send({
-        from: web3.currentProvider.selectedAddress,
+        from: web3.currentProvider.selectedAddress
     });
 };
