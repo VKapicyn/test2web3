@@ -25,11 +25,11 @@ async function connectWalletConnect() {
 
 function setProviders() {
     //Подключаем контракты
-    window.kernelContract = web3js.eth.Contract(kernelABI).at(kernelAddr);
-    window.feeAproverContract = web3js.eth.Contract(feeAproverABI).at(feeAproverAddr_proxy);
-    window.stakingContract = web3js.eth.Contract(stakingABI).at(stakingAddr_proxy);
-    window.LPTokenContract = web3js.eth.Contract(LPTokenABI).at(LPTokenAddr);
-    window.wethContract = web3js.eth.Contract(wethABI).at(wethAddr);
+    window.kernelContract = new web3js.eth.Contract(JSON.parse(kernelABI), kernelAddr);
+    window.feeAproverContract = new web3js.eth.Contract(JSON.parse(feeAproverABI), feeAproverAddr_proxy);
+    window.stakingContract = new web3js.eth.Contract(JSON.parse(stakingABI), stakingAddr_proxy);
+    window.LPTokenContract = new web3js.eth.Contract(JSON.parse(LPTokenABI), LPTokenAddr);
+    window.wethContract = new web3js.eth.Contract(JSON.parse(wethABI), wethAddr);
 }
 
 
