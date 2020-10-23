@@ -13,7 +13,6 @@ async function connectMetamask() {
         web3js = new Web3(web3.currentProvider);
 
         setProviders();
-
         alert('метамаск подключен');
     }
 };
@@ -156,7 +155,7 @@ function cycleOfGetters() {
         console.log('LPStatus', LPStatus);
         // getElementById();
     }
-    //Время до конца сборов в секундах
+    //Время до конца сборов в секундах FIXME: если время сбора истекло, возвращает мусор
     const getLPtimeToEnd = async () => {
         let LPtimeToEnd = await _getLPtimeToEnd();
         console.log('LPtimeToEnd', LPtimeToEnd);
@@ -174,6 +173,11 @@ function cycleOfGetters() {
 const callbuyLP = async (amount) => {
     await _callbuyLP(amount);
 }
+
+const callClainLP = async () => {
+    await _callClaimLP();
+}
+
 // по сути редирект на uniswap, активна когда сбор завершен
 const callBuyKernel = async () => {
     let url = `https://app.uniswap.org/#/swap?outputCurrency=${kernelAddr}`;
