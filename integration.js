@@ -1,4 +1,4 @@
-const web3js;
+let web3js;
 
 const isMetaMaskInstalled = () => {
     const {ethereum} = window;
